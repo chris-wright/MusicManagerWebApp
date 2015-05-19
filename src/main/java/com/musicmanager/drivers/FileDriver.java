@@ -7,7 +7,6 @@ import org.apache.commons.io.FileUtils;
 
 public class FileDriver {
 	public static void main(String[] args) {
-		
 		File dir = new File("D:\\backup\\music");
 		String[] extensions = {"mp3"};
 		Iterator<File> iterator = FileUtils.iterateFiles(dir, extensions, true);

@@ -21,7 +21,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.musicmanager.drivers.MD5Checksum;
 
 public class FileActions {
-	
+
 	public File createDummyFile(String filename, String contents) {
 		File file = new File(filename);
 		FileWriter fw;
@@ -85,9 +85,7 @@ public class FileActions {
 
 	public ArrayListMultimap<String, File> findDuplicatesByMD5(String rootDirectory, String[] extensions) {
 		int i = 0;
-
 		Long start = System.currentTimeMillis();
-
 		File dir = new File(rootDirectory);
 
 		ArrayListMultimap<String, File> fileMap = ArrayListMultimap.create();
@@ -105,8 +103,7 @@ public class FileActions {
 			}
 		}
 		System.out.println("Done!");
-
-
+		
 		Long end = System.currentTimeMillis();
 		System.out.println("Took: " + (end - start) + "ms");
 		return fileMap;
@@ -158,7 +155,7 @@ public class FileActions {
 		}
 		System.out.println("Done!");
 	}
-	
+
 	public void moveFile(File file, String moveDirectory) {
 		File f = new File(moveDirectory);
 		String dest = moveDirectory + "\\" + file.getName();
@@ -184,8 +181,6 @@ public class FileActions {
 		return complete.digest();
 	}
 
-	// see this How-to for a faster way to convert
-	// a byte array to a HEX string
 	public static String getMD5Checksum(String filename) throws Exception {
 		byte[] b = createChecksum(filename);
 		String result = "";
@@ -195,41 +190,28 @@ public class FileActions {
 		}
 		return result;
 	}
-	
+
 	public void copyAndDelete(File file, String moveDir) {
 		InputStream inStream = null;
 		OutputStream outStream = null;
-	 
-	    	try{
-	 
-	    	    File bfile =new File(moveDir + "\\" + file.getName());
-	 
-	    	    inStream = new FileInputStream(file);
-	    	    outStream = new FileOutputStream(bfile);
-	 
-	    	    byte[] buffer = new byte[1024];
-	 
-	    	    int length;
-	    	    //copy the file content in bytes 
-	    	    while ((length = inStream.read(buffer)) > 0){
-	 
-	    	    	outStream.write(buffer, 0, length);
-	 
-	    	    }
-	 
-	    	    inStream.close();
-	    	    outStream.close();
-	 
-	    	    //delete the original file
-	    	    file.delete();
-	    	    if(file.exists()) {
-	    	    	file.delete();
-	    	    }
-	 
-	    	    System.out.println("File is copied successful!");
-	 
-	    	}catch(IOException e){
-	    	    e.printStackTrace();
-	    	}
+		try{
+			File bfile =new File(moveDir + "\\" + file.getName());
+			inStream = new FileInputStream(file);
+			outStream = new FileOutputStream(bfile);
+			byte[] buffer = new byte[1024];
+			int length;
+			while ((length = inStream.read(buffer)) > 0){
+				outStream.write(buffer, 0, length);
+			}
+			inStream.close();
+			outStream.close();
+			file.delete();
+			if(file.exists()) {
+				file.delete();
+			}
+			System.out.println("File is copied successful!");
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 }

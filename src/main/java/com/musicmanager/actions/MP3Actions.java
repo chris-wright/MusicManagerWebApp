@@ -19,13 +19,9 @@ public class MP3Actions {
 	LastFMActions lActioner = new LastFMActions();
 	
 	public MP3File enrichFile(MP3File file) {
-//		if(FileTagHelper.hasTitleAndArtist(file.getID3v2Tag()) && !FileTagHelper.hasAlbum(file.getID3v2Tag())) {
-//			System.out.println("Has title and artist, but no album");
-//		}
 		
 		if(!FileTagHelper.hasTitle(file.getID3v2Tag())) {
 			String possibleTitle = file.getMp3file().getName().replace(".mp3", "");
-			
 		}
 		
 		if(!FileTagHelper.hasArtist(file.getID3v2Tag())) {

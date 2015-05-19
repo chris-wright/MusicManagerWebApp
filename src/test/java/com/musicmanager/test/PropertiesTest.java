@@ -19,7 +19,6 @@ public class PropertiesTest {
 		try {
 			pReader.afterPropertiesSet();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

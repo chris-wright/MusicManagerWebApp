@@ -18,14 +18,6 @@ public class MissingTagTest {
 	
 	MP3Actions actions = new MP3Actions();
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	@Test
 	public void test() {
 		List<MP3File> files = new ArrayList<MP3File>();

@@ -16,12 +16,11 @@ import com.google.common.collect.LinkedListMultimap;
 import com.musicmanager.util.PropertiesReader;
 
 public class QuarantineDuplicatesMD5 {
+	
 	public static void main(String[] args) {
 		
 		int i = 0;
-
 		Long start = System.currentTimeMillis();
-		
 		File dir = new File("C:\\git\\Other\\MusicManager\\resources\\music");
 		
 		if(!new File("C:\\git\\Other\\MusicManager\\resources\\duplicate_music").mkdirs()) {

@@ -7,11 +7,9 @@ public class MD5Checksum {
 
    public static byte[] createChecksum(String filename) throws Exception {
        InputStream fis =  new FileInputStream(filename);
-
        byte[] buffer = new byte[1024];
        MessageDigest complete = MessageDigest.getInstance("MD5");
        int numRead;
-
        do {
            numRead = fis.read(buffer);
            if (numRead > 0) {
@@ -23,8 +21,6 @@ public class MD5Checksum {
        return complete.digest();
    }
 
-   // see this How-to for a faster way to convert
-   // a byte array to a HEX string
    public static String getMD5Checksum(String filename) throws Exception {
        byte[] b = createChecksum(filename);
        String result = "";
@@ -39,13 +35,6 @@ public class MD5Checksum {
        try {
            System.out.println(getMD5Checksum("D:\\backup\\music\\Queens of the Stone Age\\Songs For The Deaf\\Queens of the Stone Age - Go With The Flow_001.mp3"));
            System.out.println(getMD5Checksum("D:\\backup\\music\\Queens of the Stone Age\\Songs For The Deaf\\Queens of the Stone Age - Go With The Flow_000.mp3"));
-           // output :
-           //  0bb2827c5eacf570b6064e24e0e6653b
-           // ref :
-           //  http://www.apache.org/dist/
-           //          tomcat/tomcat-5/v5.5.17/bin
-           //              /apache-tomcat-5.5.17.exe.MD5
-           //  0bb2827c5eacf570b6064e24e0e6653b *apache-tomcat-5.5.17.exe
        }
        catch (Exception e) {
            e.printStackTrace();
