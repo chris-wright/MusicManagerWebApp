@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h2>
+		<h:outputText value="#{msg['lblAllFiles']}"></h:outputText>
+	</h2>
+<p:dataTable value="#{id3Bean.taglessSongs}" var="file">
+	<p:column>
+		<f:facet name="header">
+			<h:outputText value="#{msg['lblFileName']}"></h:outputText>
+		</f:facet>
+		<h:outputText value="#{file.filename}"></h:outputText>
+	</p:column>
+	<p:column>
+		<f:facet name="header">
+			<h:outputText value="#{msg['lblFileType']}"></h:outputText>
+		</f:facet>
+		<h:outputText value="#{file.type}"></h:outputText>
+	</p:column>	
+	<p:column>
+		<f:facet name="header">
+			<h:outputText value="Title"></h:outputText>
+		</f:facet>
+		<h:outputText value="#{file.title}"></h:outputText>
+	</p:column>	
+	<p:column>
+		<f:facet name="header">
+			<h:outputText value="Artist"></h:outputText>
+		</f:facet>
+		<h:outputText value="#{file.artist}"></h:outputText>
+	</p:column>	
+	<p:column>
+		<f:facet name="header">
+			<h:outputText value="Album"></h:outputText>
+		</f:facet>
+		<h:outputText value="#{file.album}"></h:outputText>
+	</p:column>	
+	<p:column>
+		<f:facet name="header">
+			<h:outputText value="Genre"></h:outputText>
+		</f:facet>
+		<h:outputText value="#{file.genre}"></h:outputText>
+	</p:column>	
+	<p:column>
+		<f:facet name="header">
+			<h:outputText value="Track Number"></h:outputText>
+		</f:facet>
+		<h:outputText value="#{file.trackNumber}"></h:outputText>
+	</p:column>	
+	<p:column>
+		<f:facet name="header">
+			<h:outputText value="Year Released"></h:outputText>
+		</f:facet>
+		<h:outputText value="#{file.yearReleased}"></h:outputText>
+	</p:column>	
+	<p:column>
+		<p:commandButton value="Enrich" update="@form" actionListener="#{id3Bean.doEnrichment(file)}" />
+	</p:column>	
+</p:dataTable>
+</html>

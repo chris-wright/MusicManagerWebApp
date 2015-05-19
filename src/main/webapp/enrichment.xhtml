@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:panelGrid id="enrichGrid" columns="1">
+	    <f:facet name="header">
+	    	<h:outputText value="Enrichment Wizard" />
+	    </f:facet>
+	    
+	    <p:panelGrid columns="2" rendered="#{id3Bean.step == 1}">
+	    	<h:outputText value="Name:" />
+	    	<p:inputText value="#{id3Bean.filename}" />
+	    </p:panelGrid>
+	    
+	    <p:panelGrid columns="2" rendered="#{id3Bean.step == 2}">
+	    	<h:outputText value="Filename: " />
+	    	<h:outputText value="#{id3Bean.filename}" />
+	    	<h:outputText value="" />
+	    	<h:outputText value="" />
+	    	<h:outputText value="Title:" />
+	    	<p:inputText value="#{id3Bean.title}" />
+	    </p:panelGrid>
+	    
+	    <p:panelGrid columns="2" rendered="#{id3Bean.step == 3}">
+	    	<h:outputText value="Filename: " />
+	    	<h:outputText value="#{id3Bean.filename}" />
+	    	<h:outputText value="" />
+	    	<h:outputText value="" />
+	    	<h:outputText value="Title:" />
+	    	<h:outputText value="#{id3Bean.title}" />
+	    	<h:outputText value="Artist: " />
+	    	<p:inputText value="#{id3Bean.artist}" />
+	    	<p:dataList value="#{id3Bean.currentArtists}" var="artist" type="definition">
+	    		<h:outputText value="#{artist} " />
+				<p:commandButton value="Choose" update="@form" actionListener="#{id3Bean.chooseArtistOption(artist)}" />
+	    	</p:dataList>
+	    </p:panelGrid>
+	    
+	    <p:panelGrid id="albumGrid" columns="2" rendered="#{id3Bean.step == 4}">
+	    	<h:outputText value="Filename: " />
+	    	<h:outputText value="#{id3Bean.filename}" />
+	    	<h:outputText value="" />
+	    	<h:outputText value="" />
+	    	<h:outputText value="Title:" />
+	    	<h:outputText value="#{id3Bean.title}" />
+	    	<h:outputText value="Artist: " />
+	    	<h:outputText value="#{id3Bean.artist}" />
+	    	<h:outputText value="Album: " />
+	    	<p:inputText id="albumInput" value="#{id3Bean.album}" />
+	    	<p:dataList value="#{id3Bean.currentAlbums}" var="album" type="definition">
+	    		<h:outputText value="#{album} " />
+				<p:commandButton value="Choose" update="@form" actionListener="#{id3Bean.chooseAlbumOption(album)}" />
+	    	</p:dataList>
+	    </p:panelGrid>
+	    
+	    <p:panelGrid columns="2" rendered="#{id3Bean.step == 5}">
+	    	<h:outputText value="Filename: " />
+	    	<h:outputText value="#{id3Bean.filename}" />
+	    	<h:outputText value="" />
+	    	<h:outputText value="" />
+	    	<h:outputText value="Title:" />
+	    	<h:outputText value="#{id3Bean.title}" />
+	    	<h:outputText value="Artist: " />
+	    	<h:outputText value="#{id3Bean.artist}" />
+	    	<h:outputText value="Album: " />
+	    	<h:outputText value="#{id3Bean.album}" />
+	    </p:panelGrid>
+	    
+	    <f:facet name="footer">
+			<p:panelGrid columns="2">
+				<p:commandButton value="Back" update="@form" actionListener="#{id3Bean.previousStep}" />
+				<p:commandButton value="Next" update="@form" actionListener="#{id3Bean.nextStep}" rendered="#{id3Bean.step != 5}" />
+				<p:commandButton value="Submit" update="@form" actionListener="#{id3Bean.submit}" rendered="#{id3Bean.step == 5}" >
+					<f:setPropertyActionListener target="#{indexBean.showPanel}" value="true" />
+				</p:commandButton>
+			</p:panelGrid>
+	    </f:facet>
+	</p:panelGrid>
+</html>

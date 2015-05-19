@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<script type="text/javascript">
+		//fixup for an issue of the jsf2.0 and 2.1 ajax spec to deal with multiple forms per page
+		window.myfaces = window.myfaces || {};
+		myfaces.config = myfaces.config || {};
+		myfaces.config.no_portlet_env = true;
+	</script>
+</h:head>
+<h:body>
+	<h:form id="centerForm">
+	
+		<p:panelGrid id="content" columns="1" rendered="#{indexBean.showPanel and !id3Bean.showEnrichmentPanel and !id3Bean.showPanel and !fileViewManagedBean.showPanel and !duplicateViewManagedBean.showPanel}">
+			<f:facet name="header">
+				<h:outputText value="#{msg['lblActions']}" />
+			</f:facet>
+			<p:commandButton value="#{msg['lblViewAllFilesInDirectory']}" id="viewAllFilesBtn" update="@form" actionListener="#{fileViewManagedBean.populateFileList()}">
+				<f:setPropertyActionListener target="#{indexBean.showPanel}" value="false" />
+			</p:commandButton>
+			<p:commandButton value="#{msg['lblCheckForDuplicates']}" id="checkForDuplicatesBtn" update="@form" actionListener="#{duplicateViewManagedBean.buildDuplicatesList()}">
+				<f:setPropertyActionListener target="#{indexBean.showPanel}" value="false" />
+			</p:commandButton>
+			<p:commandButton value="#{msg['lblCheckID3Tags']}" id="checkId3Btn" update="@form" actionListener="#{id3Bean.buildTaglessSongsList()}">
+				<f:setPropertyActionListener target="#{indexBean.showPanel}" value="false" />
+			</p:commandButton>
+		</p:panelGrid>
+		
+		<p:blockUI block="content" trigger="checkForDuplicatesBtn">  
+        	<p>Getting duplicate items</p>
+        	<p:graphicImage name="rgoFk.gif" /> 
+    	</p:blockUI>
+		
+		<p:blockUI block="content" trigger="viewAllFilesBtn">  
+        	<p>Getting all Files</p>
+        	<p:graphicImage name="rgoFk.gif" /> 
+    	</p:blockUI>
+		
+		<p:blockUI block="content" trigger="checkId3Btn">  
+        	<p>Checking for missing tags</p>
+        	<p:graphicImage name="rgoFk.gif" /> 
+    	</p:blockUI>
+    	
+    	<p:panel rendered="#{duplicateViewManagedBean.showPanel}">
+    		<ui:include src="view_duplicates.xhtml" />
+    	</p:panel>
+    	
+    	<p:panel rendered="#{fileViewManagedBean.showPanel}">
+    		<ui:include src="view_all_files.xhtml" />
+    	</p:panel>
+    	
+    	<p:panel rendered="#{id3Bean.showPanel}">
+    		<ui:include src="view_missing_tags.xhtml" />
+    	</p:panel>
+    	
+    	<p:panel rendered="#{id3Bean.showEnrichmentPanel}">
+    		<ui:include src="enrichment.xhtml" />
+    	</p:panel>
+	</h:form>
+</h:body>
+</html>
